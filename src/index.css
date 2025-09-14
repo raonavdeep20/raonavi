@@ -2,41 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Power Apps Enterprise Design System - All colors in HSL */
 
 @layer base {
   :root {
+    /* Power Apps Primary Colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 218 11% 12%;
+    
+    /* Power Platform Purple Theme */
+    --primary: 295 45% 30%; /* Deep Purple #742774 */
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 295 35% 63%; /* Light Purple #A254A0 */
+    
+    /* Azure Accent */
+    --accent: 206 100% 42%; /* Azure Blue #0078D4 */
+    --accent-foreground: 0 0% 100%;
+    
+    /* Enterprise Gray Scale */
+    --secondary: 240 5% 96%; /* Light Gray #F3F2F1 */
+    --secondary-foreground: 218 11% 12%;
+    
+    --muted: 240 5% 96%;
+    --muted-foreground: 218 11% 46%;
+    
+    /* Card System */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 218 11% 12%;
+    --card-hover: 240 5% 98%;
+    
+    /* Interactive States */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 295 45% 30%;
+    
+    /* Power Apps Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(295 45% 30%), hsl(295 35% 40%));
+    --gradient-hero: linear-gradient(135deg, hsl(295 45% 30%), hsl(295 35% 63%), hsl(206 100% 42%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(240 5% 98%));
+    
+    /* Enterprise Shadows */
+    --shadow-card: 0 2px 8px -2px hsl(295 45% 30% / 0.1);
+    --shadow-elevated: 0 8px 25px -5px hsl(295 45% 30% / 0.15);
+    --shadow-hero: 0 20px 40px -12px hsl(295 45% 30% / 0.25);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --radius: 12px;
 
     --sidebar-background: 0 0% 98%;
 
@@ -55,42 +69,33 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  /* Dark mode support for enterprise theme */
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 218 11% 8%;
+    --foreground: 0 0% 98%;
+    
+    --primary: 295 35% 63%;
+    --primary-foreground: 218 11% 8%;
+    
+    --accent: 206 100% 60%;
+    --accent-foreground: 218 11% 8%;
+    
+    --secondary: 218 11% 15%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 218 11% 15%;
+    --muted-foreground: 218 11% 65%;
+    
+    --card: 218 11% 10%;
+    --card-foreground: 0 0% 98%;
+    --card-hover: 218 11% 12%;
+    
+    --border: 218 11% 20%;
+    --input: 218 11% 20%;
+    
+    --gradient-primary: linear-gradient(135deg, hsl(295 35% 63%), hsl(295 35% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(295 35% 63%), hsl(295 35% 50%), hsl(206 100% 60%));
+    --gradient-card: linear-gradient(145deg, hsl(218 11% 10%), hsl(218 11% 12%));
   }
 }
 
@@ -100,6 +105,79 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Segoe UI', 'Calibri', 'Open Sans', system-ui, sans-serif;
+  }
+  
+  /* Power Apps Component Styles */
+  .power-card {
+    @apply bg-card border border-border rounded-xl shadow-card hover:shadow-elevated transition-all duration-300;
+    background: var(--gradient-card);
+  }
+  
+  .power-tile {
+    @apply power-card p-6 hover:scale-[1.02] cursor-pointer;
+    transition: var(--transition-smooth);
+  }
+  
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .primary-gradient {
+    background: var(--gradient-primary);
+  }
+  
+  /* Enterprise Animations */
+  .slide-up {
+    @apply animate-[slideUp_0.6s_ease-out];
+  }
+  
+  .fade-in-up {
+    @apply animate-[fadeInUp_0.8s_ease-out];
+  }
+  
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+}
+
+@layer components {
+  /* Power Apps Navigation */
+  .nav-item {
+    @apply relative px-4 py-2 rounded-lg transition-all duration-300 hover:bg-secondary;
+  }
+  
+  .nav-item.active {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  .nav-item.active::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 w-1 h-1 bg-accent rounded-full transform -translate-x-1/2 translate-y-2;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -1,0 +1,208 @@
+import { Code, Cloud, Database, Wrench, Users, Target } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+
+const skillCategories = [
+  {
+    title: "Power Platform & Low-Code",
+    icon: <Code className="w-6 h-6" />,
+    color: "primary",
+    skills: [
+      { name: "Power Apps", level: 90, experience: "3+ years" },
+      { name: "Power Automate", level: 85, experience: "3+ years" },
+      { name: "SharePoint", level: 80, experience: "3+ years" },
+      { name: "Canvas Apps", level: 85, experience: "2+ years" },
+    ]
+  },
+  {
+    title: "Backend Development",
+    icon: <Database className="w-6 h-6" />,
+    color: "accent",
+    skills: [
+      { name: "C#", level: 85, experience: "3+ years" },
+      { name: ".NET Core", level: 80, experience: "3+ years" },
+      { name: "Web API", level: 80, experience: "2+ years" },
+      { name: "SQL Server", level: 75, experience: "3+ years" },
+    ]
+  },
+  {
+    title: "Cloud & DevOps",
+    icon: <Cloud className="w-6 h-6" />,
+    color: "primary",
+    skills: [
+      { name: "Microsoft Azure", level: 75, experience: "2+ years" },
+      { name: "Azure Functions", level: 70, experience: "2+ years" },
+      { name: "Azure Logic Apps", level: 80, experience: "2+ years" },
+      { name: "Azure VMs", level: 70, experience: "2+ years" },
+    ]
+  },
+  {
+    title: "Tools & Technologies",
+    icon: <Wrench className="w-6 h-6" />,
+    color: "accent",
+    skills: [
+      { name: "Git/GitHub", level: 80, experience: "3+ years" },
+      { name: "HTML/CSS", level: 75, experience: "3+ years" },
+      { name: "MySQL", level: 70, experience: "2+ years" },
+      { name: "Entity Framework", level: 75, experience: "2+ years" },
+    ]
+  }
+];
+
+const softSkills = [
+  {
+    name: "Problem Solving",
+    icon: <Target className="w-5 h-5" />,
+    description: "Analytical approach to complex technical challenges"
+  },
+  {
+    name: "Team Collaboration",
+    icon: <Users className="w-5 h-5" />,
+    description: "Experience working with interdisciplinary teams"
+  },
+  {
+    name: "Client Communication",
+    icon: <Users className="w-5 h-5" />,
+    description: "Requirement gathering and stakeholder management"
+  },
+  {
+    name: "Documentation",
+    icon: <Code className="w-5 h-5" />,
+    description: "Comprehensive project documentation across lifecycle"
+  }
+];
+
+export const SkillsSection = () => {
+  return (
+    <section id="skills" className="py-20">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16 fade-in-up">
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Skills & Expertise
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Technical proficiencies and professional competencies developed through hands-on experience
+          </p>
+        </div>
+
+        <div className="max-w-6xl mx-auto">
+          {/* Technical Skills */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-foreground mb-8 text-center">
+              Technical Skills
+            </h3>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {skillCategories.map((category, categoryIndex) => (
+                <Card
+                  key={category.title}
+                  className={`power-tile fade-in-up stagger-${categoryIndex + 1}`}
+                >
+                  <div className="p-8">
+                    {/* Category Header */}
+                    <div className="flex items-center mb-6">
+                      <div className={`p-3 rounded-xl mr-4 ${
+                        category.color === 'primary' 
+                          ? 'bg-primary/10 text-primary' 
+                          : 'bg-accent/10 text-accent'
+                      }`}>
+                        {category.icon}
+                      </div>
+                      <h4 className="text-xl font-bold text-foreground">
+                        {category.title}
+                      </h4>
+                    </div>
+
+                    {/* Skills List */}
+                    <div className="space-y-6">
+                      {category.skills.map((skill) => (
+                        <div key={skill.name}>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="font-medium text-foreground">
+                              {skill.name}
+                            </span>
+                            <span className="text-sm text-muted-foreground">
+                              {skill.experience}
+                            </span>
+                          </div>
+                          <div className="space-y-1">
+                            <Progress 
+                              value={skill.level} 
+                              className="h-2"
+                            />
+                            <div className="text-right">
+                              <span className="text-xs text-muted-foreground">
+                                {skill.level}% proficiency
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Soft Skills */}
+          <div>
+            <h3 className="text-2xl font-bold text-foreground mb-8 text-center">
+              Professional Competencies
+            </h3>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {softSkills.map((skill, index) => (
+                <Card
+                  key={skill.name}
+                  className={`power-tile text-center hover:scale-105 fade-in-up stagger-${index + 1}`}
+                >
+                  <div className="p-6">
+                    <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4">
+                      {skill.icon}
+                    </div>
+                    <h4 className="font-bold text-foreground mb-2">
+                      {skill.name}
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      {skill.description}
+                    </p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Achievement Highlights */}
+          <div className="mt-16">
+            <Card className="power-tile primary-gradient text-primary-foreground fade-in-up">
+              <div className="p-8 text-center">
+                <h3 className="text-2xl font-bold mb-4">Key Achievements</h3>
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div>
+                    <div className="text-3xl font-bold mb-2">50%</div>
+                    <p className="text-primary-foreground/80">
+                      Reduction in form processing time through Power Automate
+                    </p>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold mb-2">95%</div>
+                    <p className="text-primary-foreground/80">
+                      Customer satisfaction ratio in Azure support
+                    </p>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold mb-2">3+</div>
+                    <p className="text-primary-foreground/80">
+                      Years of enterprise software development
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
