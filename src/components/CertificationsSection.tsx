@@ -66,42 +66,50 @@ export const CertificationsSection = () => {
             
             <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
               {certifications.map((cert, index) => (
-                <Card
+                <div
                   key={cert.id}
-                  className={`power-tile group fade-in-up stagger-${index + 1} hover:scale-[1.02]`}
+                  className={`power-tile group fade-in-up stagger-${index + 1} hover:scale-[1.02] overflow-hidden`}
                 >
-                  <div className="p-8">
+                  {/* Power Apps Header */}
+                  <div className="power-app-header flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <Award className="w-4 h-4" />
+                      <span className="font-semibold text-xs">CERTIFICATION</span>
+                    </div>
+                    <Badge 
+                      variant={cert.status === 'Active' ? 'default' : 'secondary'}
+                      className="bg-accent/20 text-accent border-accent/30 text-xs"
+                    >
+                      {cert.status}
+                    </Badge>
+                  </div>
+
+                  <div className="power-app-body">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-6">
                       <div className="flex items-center space-x-4">
-                        <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-3xl">
+                        <div className="w-16 h-16 rounded-xl flex items-center justify-center text-3xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20">
                           {cert.logo}
                         </div>
                         <div>
-                          <Badge variant="secondary" className="mb-2">
+                          <div className="power-badge mb-2">
                             {cert.category}
-                          </Badge>
-                          <h4 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                          </div>
+                          <h4 className="text-lg font-bold text-primary group-hover:text-accent transition-colors">
                             {cert.title}
                           </h4>
                         </div>
                       </div>
-                      <Badge 
-                        variant={cert.status === 'Active' ? 'default' : 'secondary'}
-                        className="bg-green-100 text-green-800"
-                      >
-                        {cert.status}
-                      </Badge>
                     </div>
 
                     {/* Issuer Information */}
-                    <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
-                      <div className="flex items-center">
-                        <Building className="w-4 h-4 mr-1" />
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="flex items-center power-badge">
+                        <Building className="w-3 h-3 mr-1" />
                         {cert.issuer}
                       </div>
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
+                      <div className="flex items-center power-accent-badge">
+                        <Calendar className="w-3 h-3 mr-1" />
                         {cert.issueDate}
                       </div>
                     </div>
@@ -113,12 +121,15 @@ export const CertificationsSection = () => {
 
                     {/* Skills Covered */}
                     <div className="mb-6">
-                      <h5 className="font-semibold text-foreground mb-3">Skills Covered:</h5>
+                      <div className="flex items-center mb-3">
+                        <div className="w-2 h-2 bg-primary rounded-full mr-2"></div>
+                        <h5 className="font-semibold text-primary text-sm">Skills Covered</h5>
+                      </div>
                       <div className="flex flex-wrap gap-2">
-                        {cert.skills.map((skill) => (
+                        {cert.skills.map((skill, idx) => (
                           <span
                             key={skill}
-                            className="px-3 py-1 bg-accent/10 text-accent text-sm rounded-full font-medium"
+                            className={idx % 2 === 0 ? "power-badge text-xs" : "power-accent-badge text-xs"}
                           >
                             {skill}
                           </span>
@@ -130,31 +141,36 @@ export const CertificationsSection = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                      className="w-full bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground transition-all"
                     >
                       <Award className="w-4 h-4 mr-2" />
                       View Certificate
                       <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
                   </div>
-                </Card>
+                </div>
               ))}
 
               {/* Future Certifications Placeholder */}
-              <Card className="power-tile border-dashed border-2 fade-in-up stagger-2">
-                <div className="p-8 text-center">
-                  <div className="w-16 h-16 bg-muted/50 rounded-xl flex items-center justify-center text-3xl mx-auto mb-4">
+              <div className="power-tile border-dashed border-2 border-primary/30 fade-in-up stagger-2 overflow-hidden">
+                <div className="power-app-header">
+                  <div className="flex items-center space-x-3">
+                    <span className="text-sm font-semibold">UPCOMING</span>
+                  </div>
+                </div>
+                <div className="power-app-body text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center text-3xl mx-auto mb-4 border border-primary/20">
                     🎯
                   </div>
-                  <h4 className="text-xl font-bold text-foreground mb-2">
+                  <h4 className="text-lg font-bold text-primary mb-2">
                     More Certifications Coming Soon
                   </h4>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-muted-foreground mb-4 text-sm">
                     Currently pursuing additional Microsoft Azure and Power Platform certifications
                   </p>
-                  <Badge variant="outline">In Progress</Badge>
+                  <div className="power-accent-badge">In Progress</div>
                 </div>
-              </Card>
+              </div>
             </div>
           </div>
 
@@ -166,20 +182,25 @@ export const CertificationsSection = () => {
             
             <div className="grid md:grid-cols-3 gap-6">
               {additionalSkillAreas.map((area, index) => (
-                <Card
+                <div
                   key={area.area}
-                  className={`power-tile text-center fade-in-up stagger-${index + 3}`}
+                  className={`power-tile text-center fade-in-up stagger-${index + 3} overflow-hidden`}
                 >
-                  <div className="p-6">
-                    <div className="text-4xl mb-4">{area.icon}</div>
-                    <h4 className="text-lg font-bold text-foreground mb-3">
+                  <div className="power-app-header">
+                    <div className="flex items-center justify-center space-x-2">
+                      <span className="text-2xl">{area.icon}</span>
+                      <span className="text-xs font-semibold">EXPERTISE</span>
+                    </div>
+                  </div>
+                  <div className="power-app-body text-center">
+                    <h4 className="text-lg font-bold text-primary mb-3">
                       {area.area}
                     </h4>
                     <p className="text-muted-foreground text-sm">
                       {area.description}
                     </p>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
           </div>

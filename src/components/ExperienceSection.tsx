@@ -69,32 +69,41 @@ export const ExperienceSection = () => {
                   key={exp.id}
                   className={`fade-in-up stagger-${index + 1}`}
                 >
-                  <Card className="power-tile relative lg:ml-20">
+                  <div className="power-tile relative lg:ml-20 overflow-hidden">
                     {/* Timeline Dot */}
-                    <div className="absolute -left-12 top-8 w-4 h-4 rounded-full bg-primary border-4 border-background hidden lg:block"></div>
+                    <div className="absolute -left-12 top-8 w-4 h-4 rounded-full bg-primary border-4 border-background hidden lg:block shadow-lg"></div>
 
-                    <div className="p-8">
+                    {/* Power Apps Header */}
+                    <div className="power-app-header flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <Building2 className="w-5 h-5" />
+                        <span className="font-semibold text-sm">WORK EXPERIENCE</span>
+                      </div>
+                      <div className="w-2 h-2 bg-accent rounded-full"></div>
+                    </div>
+
+                    <div className="power-app-body">
                       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
                         <div className="flex-1">
-                          <div className="flex items-center mb-2">
-                            <Building2 className="w-5 h-5 text-primary mr-2" />
-                            <h3 className="text-2xl font-bold text-foreground">
-                              {exp.company}
-                            </h3>
-                          </div>
+                          <h3 className="text-2xl font-bold text-primary mb-2">
+                            {exp.company}
+                          </h3>
                           
-                          <h4 className="text-xl font-semibold text-primary mb-2">
+                          <h4 className="text-lg font-semibold text-foreground mb-3">
                             {exp.position}
                           </h4>
                           
-                          <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
-                            <div className="flex items-center">
-                              <Calendar className="w-4 h-4 mr-1" />
+                          <div className="flex flex-wrap gap-3 mb-4">
+                            <div className="flex items-center power-badge">
+                              <Calendar className="w-3 h-3 mr-1" />
                               {exp.duration}
                             </div>
-                            <div className="flex items-center">
-                              <MapPin className="w-4 h-4 mr-1" />
+                            <div className="flex items-center power-badge">
+                              <MapPin className="w-3 h-3 mr-1" />
                               {exp.location}
+                            </div>
+                            <div className="power-accent-badge">
+                              {exp.type}
                             </div>
                           </div>
                         </div>
@@ -115,10 +124,10 @@ export const ExperienceSection = () => {
 
                       {/* Technologies */}
                       <div className="flex flex-wrap gap-2 mb-6">
-                        {exp.technologies.map((tech) => (
+                        {exp.technologies.map((tech, idx) => (
                           <span
                             key={tech}
-                            className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full font-medium"
+                            className={idx % 2 === 0 ? "power-badge" : "power-accent-badge"}
                           >
                             {tech}
                           </span>
@@ -127,17 +136,20 @@ export const ExperienceSection = () => {
 
                       {/* Expanded Content */}
                       {expandedId === exp.id && (
-                        <div className="space-y-3 border-t border-border pt-6">
-                          <h5 className="font-semibold text-foreground mb-3">
-                            Key Responsibilities:
-                          </h5>
-                          <ul className="space-y-2">
+                        <div className="space-y-3 border-t border-primary/20 pt-6 mt-6">
+                          <div className="flex items-center mb-3">
+                            <div className="w-3 h-3 bg-accent rounded-full mr-2"></div>
+                            <h5 className="font-semibold text-primary">
+                              Key Responsibilities
+                            </h5>
+                          </div>
+                          <ul className="space-y-3">
                             {exp.responsibilities.map((responsibility, idx) => (
                               <li
                                 key={idx}
-                                className="flex items-start text-muted-foreground"
+                                className="flex items-start text-muted-foreground pl-4 relative"
                               >
-                                <span className="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                <div className="absolute left-0 top-2 w-1.5 h-1.5 bg-primary rounded-full"></div>
                                 {responsibility}
                               </li>
                             ))}
@@ -145,7 +157,7 @@ export const ExperienceSection = () => {
                         </div>
                       )}
                     </div>
-                  </Card>
+                  </div>
                 </div>
               ))}
             </div>

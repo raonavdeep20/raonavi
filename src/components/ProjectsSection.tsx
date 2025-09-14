@@ -89,48 +89,46 @@ export const ProjectsSection = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {projects.map((project, index) => (
-            <Card
+            <div
               key={project.id}
-              className={`power-tile group fade-in-up stagger-${index + 1}`}
+              className={`power-tile group fade-in-up stagger-${index + 1} overflow-hidden`}
             >
-              <div className="p-8">
-                {/* Project Icon */}
-                <div className={`inline-flex p-4 rounded-xl mb-6 ${
-                  project.color === 'primary' ? 'bg-primary/10 text-primary' : 'bg-accent/10 text-accent'
-                }`}>
-                  {project.icon}
+              {/* Power Apps Header */}
+              <div className="power-app-header flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="text-primary-foreground text-lg">
+                    {project.icon}
+                  </div>
+                  <span className="font-semibold text-xs">PROJECT</span>
                 </div>
-
-                {/* Category Badge */}
-                <Badge 
-                  variant="secondary" 
-                  className="mb-4"
-                >
+                <div className="power-accent-badge text-xs bg-accent/20 text-accent border-accent/30">
                   {project.category}
-                </Badge>
+                </div>
+              </div>
 
+              <div className="power-app-body">
                 {/* Project Title */}
-                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-accent transition-colors">
                   {project.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-muted-foreground mb-6 line-clamp-3">
+                <p className="text-muted-foreground mb-6 line-clamp-3 text-sm">
                   {project.description}
                 </p>
 
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.slice(0, 3).map((tech) => (
+                  {project.technologies.slice(0, 3).map((tech, idx) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-md font-medium"
+                      className={idx % 2 === 0 ? "power-badge text-xs" : "power-accent-badge text-xs"}
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <span className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-md font-medium">
+                    <span className="power-badge text-xs">
                       +{project.technologies.length - 3} more
                     </span>
                   )}
@@ -143,7 +141,7 @@ export const ProjectsSection = () => {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="flex-1"
+                        className="flex-1 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground transition-all"
                         onClick={() => setSelectedProject(project)}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
@@ -211,7 +209,7 @@ export const ProjectsSection = () => {
                   </Dialog>
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>

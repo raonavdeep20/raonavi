@@ -94,42 +94,47 @@ export const SkillsSection = () => {
             
             <div className="grid md:grid-cols-2 gap-8">
               {skillCategories.map((category, categoryIndex) => (
-                <Card
+                <div
                   key={category.title}
-                  className={`power-tile fade-in-up stagger-${categoryIndex + 1}`}
+                  className={`power-tile fade-in-up stagger-${categoryIndex + 1} overflow-hidden`}
                 >
-                  <div className="p-8">
-                    {/* Category Header */}
-                    <div className="flex items-center mb-6">
-                      <div className={`p-3 rounded-xl mr-4 ${
-                        category.color === 'primary' 
-                          ? 'bg-primary/10 text-primary' 
-                          : 'bg-accent/10 text-accent'
-                      }`}>
-                        {category.icon}
-                      </div>
-                      <h4 className="text-xl font-bold text-foreground">
+                  {/* Power Apps Header */}
+                  <div className="power-app-header flex items-center justify-center space-x-3">
+                    <div className="text-primary-foreground">
+                      {category.icon}
+                    </div>
+                    <span className="font-semibold text-xs">SKILLS</span>
+                  </div>
+
+                  <div className="power-app-body">
+                    {/* Category Title */}
+                    <div className="text-center mb-6">
+                      <h4 className="text-lg font-bold text-primary">
                         {category.title}
                       </h4>
                     </div>
 
                     {/* Skills List */}
                     <div className="space-y-6">
-                      {category.skills.map((skill) => (
+                      {category.skills.map((skill, idx) => (
                         <div key={skill.name}>
                           <div className="flex items-center justify-between mb-2">
-                            <span className="font-medium text-foreground">
+                            <span className="font-medium text-foreground text-sm">
                               {skill.name}
                             </span>
-                            <span className="text-sm text-muted-foreground">
+                            <span className={idx % 2 === 0 ? "power-badge text-xs" : "power-accent-badge text-xs"}>
                               {skill.experience}
                             </span>
                           </div>
                           <div className="space-y-1">
-                            <Progress 
-                              value={skill.level} 
-                              className="h-2"
-                            />
+                            <div className="w-full bg-secondary/50 rounded-full h-2 border border-primary/20">
+                              <div
+                                className="bg-gradient-to-r from-primary to-accent rounded-full h-2 transition-all duration-1000 relative overflow-hidden"
+                                style={{ width: `${skill.level}%` }}
+                              >
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20"></div>
+                              </div>
+                            </div>
                             <div className="text-right">
                               <span className="text-xs text-muted-foreground">
                                 {skill.level}% proficiency
@@ -140,7 +145,7 @@ export const SkillsSection = () => {
                       ))}
                     </div>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
           </div>
@@ -153,22 +158,27 @@ export const SkillsSection = () => {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {softSkills.map((skill, index) => (
-                <Card
+                <div
                   key={skill.name}
-                  className={`power-tile text-center hover:scale-105 fade-in-up stagger-${index + 1}`}
+                  className={`power-tile text-center hover:scale-105 fade-in-up stagger-${index + 1} overflow-hidden`}
                 >
-                  <div className="p-6">
-                    <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-4">
+                  {/* Power Apps Header */}
+                  <div className="power-app-header flex items-center justify-center space-x-2">
+                    <div className="text-primary-foreground">
                       {skill.icon}
                     </div>
-                    <h4 className="font-bold text-foreground mb-2">
+                    <span className="font-semibold text-xs">COMPETENCY</span>
+                  </div>
+
+                  <div className="power-app-body text-center">
+                    <h4 className="font-bold text-primary mb-2">
                       {skill.name}
                     </h4>
                     <p className="text-sm text-muted-foreground">
                       {skill.description}
                     </p>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
           </div>

@@ -85,21 +85,27 @@ export const ContactSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <Card className="power-tile fade-in-up stagger-1">
-              <div className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="p-3 rounded-xl bg-primary/10 text-primary mr-4">
-                    <Send className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground">
+            <div className="power-tile fade-in-up stagger-1 overflow-hidden">
+              {/* Power Apps Header */}
+              <div className="power-app-header flex items-center justify-center space-x-3">
+                <Send className="w-5 h-5" />
+                <span className="font-semibold text-sm">CONTACT FORM</span>
+              </div>
+
+              <div className="power-app-body">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold text-primary mb-2">
                     Send a Message
                   </h3>
+                  <p className="text-muted-foreground text-sm">
+                    Let's discuss how we can work together
+                  </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
+                      <label className="block text-sm font-medium text-primary mb-2">
                         Full Name *
                       </label>
                       <Input
@@ -108,11 +114,11 @@ export const ContactSection = () => {
                         onChange={handleChange}
                         placeholder="Your full name"
                         required
-                        className="power-card"
+                        className="border-primary/20 focus:border-primary"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
+                      <label className="block text-sm font-medium text-primary mb-2">
                         Email Address *
                       </label>
                       <Input
@@ -122,13 +128,13 @@ export const ContactSection = () => {
                         onChange={handleChange}
                         placeholder="your.email@example.com"
                         required
-                        className="power-card"
+                        className="border-primary/20 focus:border-primary"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
+                    <label className="block text-sm font-medium text-primary mb-2">
                       Subject *
                     </label>
                     <Input
@@ -137,12 +143,12 @@ export const ContactSection = () => {
                       onChange={handleChange}
                       placeholder="What's this about?"
                       required
-                      className="power-card"
+                      className="border-primary/20 focus:border-primary"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
+                    <label className="block text-sm font-medium text-primary mb-2">
                       Message *
                     </label>
                     <Textarea
@@ -152,7 +158,7 @@ export const ContactSection = () => {
                       placeholder="Tell me about your project or inquiry..."
                       rows={6}
                       required
-                      className="power-card"
+                      className="border-primary/20 focus:border-primary"
                     />
                   </div>
 
@@ -160,7 +166,7 @@ export const ContactSection = () => {
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full primary-gradient text-primary-foreground hover:scale-[1.02] transition-transform"
+                    className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground hover:scale-[1.02] transition-all"
                   >
                     {isSubmitting ? (
                       <>
@@ -176,7 +182,7 @@ export const ContactSection = () => {
                   </Button>
                 </form>
               </div>
-            </Card>
+            </div>
 
             {/* Contact Information */}
             <div className="space-y-8 fade-in-up stagger-2">
@@ -186,33 +192,34 @@ export const ContactSection = () => {
                 </h3>
                 <div className="space-y-4">
                   {contactInfo.map((info, index) => (
-                    <Card
+                    <div
                       key={info.label}
-                      className={`power-tile hover:scale-[1.02] transition-transform cursor-pointer fade-in-up stagger-${index + 3}`}
+                      className={`power-tile hover:scale-[1.02] transition-transform cursor-pointer fade-in-up stagger-${index + 3} overflow-hidden`}
                     >
+                      {/* Power Apps Header */}
+                      <div className="power-app-header flex items-center justify-center space-x-3">
+                        <div className="text-primary-foreground">
+                          {info.icon}
+                        </div>
+                        <span className="font-semibold text-xs">CONTACT</span>
+                      </div>
+
                       <a
                         href={info.href}
-                        className="flex items-center p-6 text-decoration-none"
+                        className="block power-app-body text-decoration-none"
                         target={info.href.startsWith('http') ? '_blank' : undefined}
                         rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       >
-                        <div className={`p-3 rounded-xl mr-4 ${
-                          info.color === 'primary' 
-                            ? 'bg-primary/10 text-primary' 
-                            : 'bg-accent/10 text-accent'
-                        }`}>
-                          {info.icon}
-                        </div>
-                        <div>
-                          <div className="font-medium text-foreground">
+                        <div className="text-center">
+                          <div className="font-medium text-primary mb-1">
                             {info.label}
                           </div>
-                          <div className="text-muted-foreground">
+                          <div className="text-muted-foreground text-sm">
                             {info.value}
                           </div>
                         </div>
                       </a>
-                    </Card>
+                    </div>
                   ))}
                 </div>
               </div>
