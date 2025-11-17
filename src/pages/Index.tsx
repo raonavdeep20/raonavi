@@ -6,6 +6,7 @@ import { ProjectsSection } from "@/components/ProjectsSection";
 import { CertificationsSection } from "@/components/CertificationsSection";
 import { SkillsSection } from "@/components/SkillsSection";
 import { ContactSection } from "@/components/ContactSection";
+import HexagonHoneycomb from "@/components/HexagonHoneycomb";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("profile");
@@ -42,6 +43,7 @@ const Index = () => {
         <ProjectsSection />
         <CertificationsSection />
         <SkillsSection />
+        <HexagonHoneycomb />
         <ContactSection />
       </main>
     </div>
