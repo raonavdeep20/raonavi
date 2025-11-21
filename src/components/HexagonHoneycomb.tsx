@@ -6,9 +6,9 @@ const HexagonHoneycomb: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const hexagonRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const honeycomb = [5, 6, 7, 8, 9, 8, 7, 6, 5];
-  // Tech skills icons customized for Power Platform & Development
-  const icons = ['⚡', '🔄', '📊', '💾', '☁️', '🔐', '🌐', '⚙️', '📱', '💻', '🗃️', '🔌', '🎯', '📈', '🚀', '🔧', '⌨️', '🖥️', '📡', '🛠️', '💡', '🔗', '📋', '✨', '🎨', '⚡', '🔄', '📊', '💾', '☁️', '🔐', '🌐', '⚙️', '📱', '💻', '🗃️', '🔌', '🎯', '📈', '🚀', '🔧', '⌨️', '🖥️', '📡', '🛠️', '💡', '🔗', '📋', '✨', '🎨', '⚡', '🔄', '📊', '💾', '☁️', '🔐', '🌐', '⚙️', '📱', '💻'];
+  const honeycomb = [1, 2, 3, 2];
+  // Tech skills - exactly 8 items as specified
+  const icons = ['Power Apps', 'Power Automate', 'Power BI', '.Net Core', 'SharePoint', 'Azure', 'Co-Pilot', 'Outsystem'];
 
   const ripple = (target: HTMLDivElement) => {
     if (showRipple) return;
@@ -241,10 +241,13 @@ const HexagonHoneycomb: React.FC = () => {
                 display: 'grid',
                 placeItems: 'center',
                 position: 'absolute',
-                filter: 'var(--icon-filter)',
-                fontSize: '2.5vmin',
+                fontSize: '1.2vmin',
+                fontWeight: '600',
+                color: 'white',
                 inset: '0',
                 pointerEvents: 'none',
+                padding: '0.5rem',
+                textAlign: 'center',
               }}
             >
               {icons[iconIndex]}
