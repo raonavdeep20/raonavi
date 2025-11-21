@@ -3,12 +3,25 @@ import React, { useState, useEffect, useRef } from 'react';
 const HexagonHoneycomb: React.FC = () => {
   const [showRipple, setShowRipple] = useState(false);
   const [isVisionUI, setIsVisionUI] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const hexagonRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const honeycomb = [1, 2, 3, 2];
-  // Tech skills - exactly 8 items as specified
-  const icons = ['Power Apps', 'Power Automate', 'Power BI', '.Net Core', 'SharePoint', 'Azure', 'Co-Pilot', 'Outsystem'];
+  
+  // Tech skills with detailed descriptions
+  const techSkills = [
+    { name: 'Power Apps', description: 'Low-code app development platform for building business applications' },
+    { name: 'Power Automate', description: 'Workflow automation tool for streamlining business processes' },
+    { name: 'Power BI', description: 'Business intelligence and data visualization platform' },
+    { name: '.Net Core', description: 'Cross-platform framework for building modern applications' },
+    { name: 'SharePoint', description: 'Collaboration and document management platform' },
+    { name: 'Azure', description: 'Cloud computing platform for building and deploying applications' },
+    { name: 'Co-Pilot', description: 'AI-powered assistant for productivity and development' },
+    { name: 'Outsystem', description: 'Low-code platform for enterprise application development' }
+  ];
+  
+  const icons = techSkills.map(skill => skill.name);
 
   const ripple = (target: HTMLDivElement) => {
     if (showRipple) return;
@@ -87,7 +100,7 @@ const HexagonHoneycomb: React.FC = () => {
         --icon-filter: saturate(3.4) brightness(0.5) invert(1);
         --ripple-filter: blur(1rem);
         --hover-filter: brightness(1.2);
-        --hexagon-size: 8vmin;
+        --hexagon-size: 12vmin;
         --gap: 0.1vmin;
       }
 
@@ -157,26 +170,61 @@ const HexagonHoneycomb: React.FC = () => {
 
       @media (max-width: 768px) {
         .hexagon-container {
-          --hexagon-size: 6vmin;
+          --hexagon-size: 10vmin;
         }
       }
 
       @media (max-width: 480px) {
         .hexagon-container {
-          --hexagon-size: 5vmin;
+          --hexagon-size: 8vmin;
         }
       }
 
       @media (min-width: 1200px) {
         .hexagon-container {
-          --hexagon-size: 7vmin;
+          --hexagon-size: 10vmin;
         }
       }
 
       @media (max-height: 600px) {
         .hexagon-container {
-          --hexagon-size: 6vh;
+          --hexagon-size: 8vh;
         }
+      }
+
+      .tooltip {
+        position: fixed;
+        background: rgba(116, 39, 116, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        color: white;
+        font-size: 0.9rem;
+        pointer-events: none;
+        z-index: 1000;
+        max-width: 300px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .tooltip.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .tooltip-title {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #fff;
+      }
+
+      .tooltip-desc {
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.4;
       }
     `;
     document.head.appendChild(style);
@@ -201,6 +249,7 @@ const HexagonHoneycomb: React.FC = () => {
       const cells = [];
       for (let cellIndex = 0; cellIndex < column; cellIndex++) {
         iconIndex++;
+        const currentIndex = iconIndex;
         cells.push(
           <div
             key={`${columnIndex}-${cellIndex}`}
@@ -234,6 +283,17 @@ const HexagonHoneycomb: React.FC = () => {
               cursor: 'pointer',
             } as React.CSSProperties}
             onClick={(e) => ripple(e.currentTarget)}
+            onMouseEnter={(e) => {
+              setHoveredIndex(currentIndex);
+              const tooltip = document.getElementById('tech-tooltip');
+              if (tooltip) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                tooltip.style.left = `${rect.left + rect.width / 2}px`;
+                tooltip.style.top = `${rect.top - 10}px`;
+                tooltip.style.transform = 'translate(-50%, -100%)';
+              }
+            }}
+            onMouseLeave={() => setHoveredIndex(null)}
           >
             <div
               style={{
@@ -241,13 +301,14 @@ const HexagonHoneycomb: React.FC = () => {
                 display: 'grid',
                 placeItems: 'center',
                 position: 'absolute',
-                fontSize: '1.2vmin',
+                fontSize: '1.8vmin',
                 fontWeight: '600',
                 color: 'white',
                 inset: '0',
                 pointerEvents: 'none',
-                padding: '0.5rem',
+                padding: '1rem',
                 textAlign: 'center',
+                lineHeight: '1.2',
               }}
             >
               {icons[iconIndex]}
@@ -381,6 +442,19 @@ const HexagonHoneycomb: React.FC = () => {
           >
             {isVisionUI ? '⚡' : '💻'}
           </div>
+        </div>
+
+        {/* Tooltip */}
+        <div 
+          id="tech-tooltip"
+          className={`tooltip ${hoveredIndex !== null ? 'show' : ''}`}
+        >
+          {hoveredIndex !== null && techSkills[hoveredIndex] && (
+            <>
+              <div className="tooltip-title">{techSkills[hoveredIndex].name}</div>
+              <div className="tooltip-desc">{techSkills[hoveredIndex].description}</div>
+            </>
+          )}
         </div>
       </div>
     </section>
