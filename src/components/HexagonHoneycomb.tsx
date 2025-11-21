@@ -86,46 +86,35 @@ const HexagonHoneycomb: React.FC = () => {
       }
 
       .hexagon-container {
-        --color-primary: #742774;
-        --color-secondary: #A254A0;
-        --color-tertiary: #0078D4;
-        --color-quaternary: #742774;
-        --color-surface: #201F1E;
-        --bg: linear-gradient(
-          to bottom,
-          color-mix(in srgb, var(--color-quaternary), black 70%),
-          var(--color-surface)
-        );
-        --color-on-surface: var(--color-primary);
-        --icon-filter: saturate(3.4) brightness(0.5) invert(1);
-        --ripple-filter: blur(1rem);
-        --hover-filter: brightness(1.2);
         --hexagon-size: 12vmin;
         --gap: 0.1vmin;
       }
 
       @media (any-pointer: fine) {
         .hexagon-container {
-          --icon-filter: saturate(3.4) brightness(0.5) invert(1);
           --ripple-filter: blur(1rem);
         }
       }
 
       .hexagon-container.vision-ui {
-        --color-surface-container: rgba(116, 39, 116, 0.35);
-        --color-on-surface: white;
         --hover-filter: brightness(1.5);
       }
 
       @media (any-pointer: fine) {
         .hexagon-container.vision-ui {
-          --icon-filter: saturate(0.4);
           --ripple-filter: blur(0.2rem);
         }
       }
 
+      .hexagon {
+        transition: all 0.3s ease;
+      }
+
+
       .hexagon:hover {
-        filter: var(--hover-filter) !important;
+        transform: translateY(-5px);
+        filter: brightness(1.2);
+        box-shadow: 0 10px 30px hsla(295, 45%, 30%, 0.4);
       }
 
       @keyframes ripple {
@@ -194,17 +183,17 @@ const HexagonHoneycomb: React.FC = () => {
 
       .tooltip {
         position: fixed;
-        background: rgba(116, 39, 116, 0.95);
+        background: hsl(var(--primary) / 0.95);
         backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid hsl(var(--primary-light) / 0.3);
         border-radius: 12px;
         padding: 1rem 1.5rem;
-        color: white;
+        color: hsl(var(--primary-foreground));
         font-size: 0.9rem;
         pointer-events: none;
         z-index: 1000;
         max-width: 300px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--shadow-elevated);
         opacity: 0;
         transform: translateY(10px);
         transition: opacity 0.3s ease, transform 0.3s ease;
@@ -219,11 +208,11 @@ const HexagonHoneycomb: React.FC = () => {
         font-weight: 600;
         font-size: 1rem;
         margin-bottom: 0.5rem;
-        color: #fff;
+        color: hsl(var(--primary-foreground));
       }
 
       .tooltip-desc {
-        color: rgba(255, 255, 255, 0.9);
+        color: hsl(var(--primary-foreground) / 0.9);
         line-height: 1.4;
       }
     `;
@@ -265,8 +254,11 @@ const HexagonHoneycomb: React.FC = () => {
               width: 'var(--hexagon-size)',
               aspectRatio: '1',
               position: 'relative',
-              background: `var(--color-surface-container, color-mix(in srgb, var(--color-secondary), var(--color-primary) var(--mix-percentage)))`,
-              backdropFilter: 'blur(1rem)',
+              background: isVisionUI 
+                ? `linear-gradient(135deg, hsl(var(--primary-light) / 0.4), hsl(var(--accent) / 0.3))`
+                : `linear-gradient(135deg, hsl(var(--primary) / ${0.15 + (columnIndex * (cellIndex + 1)) * 0.01}), hsl(var(--primary-light) / ${0.1 + (columnIndex * (cellIndex + 1)) * 0.01}))`,
+              backdropFilter: 'blur(10px)',
+              border: `1px solid ${isVisionUI ? 'hsl(var(--primary-light) / 0.3)' : 'hsl(var(--primary) / 0.2)'}`,
               clipPath: `polygon(
                 98.66024% 45%, 99.39693% 46.5798%, 99.84808% 48.26352%, 100% 50%,
                 99.84808% 51.73648%, 99.39693% 53.4202%, 98.66025% 55%, 78.66025% 89.64102%,
@@ -297,13 +289,12 @@ const HexagonHoneycomb: React.FC = () => {
           >
             <div
               style={{
-                content: `var(--icon)`,
                 display: 'grid',
                 placeItems: 'center',
                 position: 'absolute',
                 fontSize: '1.8vmin',
                 fontWeight: '600',
-                color: 'white',
+                color: isVisionUI ? 'hsl(var(--primary-foreground))' : 'hsl(var(--primary))',
                 inset: '0',
                 pointerEvents: 'none',
                 padding: '1rem',
@@ -335,45 +326,45 @@ const HexagonHoneycomb: React.FC = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden bg-gradient-to-b from-background via-secondary/30 to-background">
       <div 
-        className={`hexagon-container ${isVisionUI ? 'vision-ui' : ''}`}
+        className="container mx-auto relative"
         style={{
-          width: '100%',
           minHeight: '80vh',
           display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          background: 'var(--bg)',
-          color: 'var(--color-on-surface)',
-          overflow: 'hidden',
-          position: 'relative',
         }}
       >
+        {/* Background gradient overlay */}
         <div
+          className="absolute inset-0 pointer-events-none"
           style={{
-            content: '""',
-            position: 'absolute',
-            inset: '0',
-            pointerEvents: 'none',
-            background: `radial-gradient(at center, transparent 80%, #201F1E)`,
-            opacity: isVisionUI ? 0.8 : 0,
-            filter: isVisionUI ? 'blur(0)' : 'blur(0.5rem)',
-            transition: 'opacity 0.6s ease-in-out, filter 0.6s ease-in-out',
+            background: `radial-gradient(circle at center, hsl(var(--primary) / 0.05) 0%, transparent 70%)`,
+            opacity: isVisionUI ? 0.8 : 0.5,
+            transition: 'opacity 0.6s ease-in-out',
           }}
         />
         
-        <div className="absolute top-8 left-1/2 -translate-x-1/2 text-center z-10">
-          <h2 className="text-4xl font-bold text-white mb-2">Tech Skills Showcase</h2>
-          <p className="text-white/80">Click on any hexagon to see the ripple effect</p>
+        <div className="relative z-10 text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{
+            background: 'var(--gradient-hero)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>
+            Tech Skills Showcase
+          </h2>
+          <p className="text-muted-foreground text-lg">Click on any hexagon to see the ripple effect</p>
         </div>
+
 
         <div 
           ref={containerRef}
-          className={`honeycomb-wrapper ${showRipple ? 'show-ripple' : ''}`}
+          className={`honeycomb-wrapper ${showRipple ? 'show-ripple' : ''} relative z-10`}
           style={{
             display: 'flex',
-            position: 'relative',
             alignItems: 'center',
             justifyContent: 'center',
             pointerEvents: showRipple ? 'none' : 'auto',
@@ -382,67 +373,18 @@ const HexagonHoneycomb: React.FC = () => {
           {renderHoneycomb()}
         </div>
         
-        <div 
-          className={`switch ${isVisionUI ? 'checked' : ''}`}
+        {/* Theme Toggle */}
+        <button 
+          className={`absolute top-8 right-8 z-20 power-card px-4 py-2 rounded-full transition-all duration-300 hover:scale-105`}
           onClick={toggleTheme}
           style={{
-            '--mix-percentage': 'calc(2 * 6 * 3%)',
-            width: '8vmin',
-            aspectRatio: '2',
-            position: 'absolute',
-            display: 'flex',
-            top: '4vmin',
-            right: '4vmin',
-            background: `var(--color-surface-container, color-mix(in srgb, var(--color-secondary), var(--color-primary) var(--mix-percentage)))`,
-            backdropFilter: 'blur(1rem)',
-            clipPath: `polygon(
-              98.66024% 45%, 99.39693% 46.5798%, 99.84808% 48.26352%, 100% 50%,
-              99.84808% 51.73648%, 99.39693% 53.4202%, 98.66025% 55%, 78.66025% 89.64102%,
-              77.66044% 91.06889%, 76.42788% 92.30146%, 75% 93.30127%, 73.4202% 94.03794%,
-              71.73648% 94.48909%, 70% 94.64102%, 30% 94.64102%, 28.26352% 94.48909%,
-              26.5798% 94.03794%, 25% 93.30127%, 23.57212% 92.30146%, 22.33956% 91.06889%,
-              21.33975% 89.64102%, 1.33975% 55%, 0.60307% 53.4202%, 0.15192% 51.73648%,
-              0% 50%, 0.15192% 48.26352%, 0.60307% 46.5798%, 1.33975% 45%,
-              21.33975% 10.35898%, 22.33956% 8.93111%, 23.57212% 7.69854%, 25% 6.69873%,
-              26.5798% 5.96206%, 28.26352% 5.51091%, 30% 5.35898%, 70% 5.35898%,
-              71.73648% 5.51091%, 73.4202% 5.96206%, 75% 6.69873%, 76.42788% 7.69854%,
-              77.66044% 8.93111%, 78.66025% 10.35898%
-            )`,
-            cursor: 'pointer',
-            fontSize: '2vmin',
-          } as React.CSSProperties}
+            background: isVisionUI ? 'var(--gradient-primary)' : 'hsl(var(--card))',
+            color: isVisionUI ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
+            border: `1px solid ${isVisionUI ? 'hsl(var(--primary-light))' : 'hsl(var(--border))'}`,
+          }}
         >
-          <div
-            style={{
-              display: 'grid',
-              placeItems: 'center',
-              position: 'absolute',
-              left: '0',
-              top: '0',
-              height: '100%',
-              width: '75%',
-              background: `var(--color-surface-container, color-mix(in srgb, var(--color-secondary), var(--color-primary) calc(4 * 6 * 3%)))`,
-              backdropFilter: 'blur(1rem)',
-              clipPath: `polygon(
-                98.66024% 45%, 99.39693% 46.5798%, 99.84808% 48.26352%, 100% 50%,
-                99.84808% 51.73648%, 99.39693% 53.4202%, 98.66025% 55%, 78.66025% 89.64102%,
-                77.66044% 91.06889%, 76.42788% 92.30146%, 75% 93.30127%, 73.4202% 94.03794%,
-                71.73648% 94.48909%, 70% 94.64102%, 30% 94.64102%, 28.26352% 94.48909%,
-                26.5798% 94.03794%, 25% 93.30127%, 23.57212% 92.30146%, 22.33956% 91.06889%,
-                21.33975% 89.64102%, 1.33975% 55%, 0.60307% 53.4202%, 0.15192% 51.73648%,
-                0% 50%, 0.15192% 48.26352%, 0.60307% 46.5798%, 1.33975% 45%,
-                21.33975% 10.35898%, 22.33956% 8.93111%, 23.57212% 7.69854%, 25% 6.69873%,
-                26.5798% 5.96206%, 28.26352% 5.51091%, 30% 5.35898%, 70% 5.35898%,
-                71.73648% 5.51091%, 73.4202% 5.96206%, 75% 6.69873%, 76.42788% 7.69854%,
-                77.66044% 8.93111%, 78.66025% 10.35898%
-              )`,
-              transition: 'transform 0.3s ease',
-              transform: isVisionUI ? 'translateX(25%)' : 'translateX(0)',
-            }}
-          >
-            {isVisionUI ? '⚡' : '💻'}
-          </div>
-        </div>
+          <span className="text-xl">{isVisionUI ? '⚡' : '💻'}</span>
+        </button>
 
         {/* Tooltip */}
         <div 
