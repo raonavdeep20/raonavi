@@ -5,13 +5,14 @@ import heroBackground from "@/assets/hero-background.jpg";
 
 export const ProfileSection = () => {
   return (
-    <section id="profile" className="relative min-h-screen flex items-center">
+    <section id="profile" className="relative min-h-screen flex items-center pt-16">
       {/* Hero Background */}
       <div className="absolute inset-0 overflow-hidden">
         <img
           src={heroBackground}
           alt="Hero Background"
           className="w-full h-full object-cover opacity-20"
+          loading="eager"
         />
         <div className="absolute inset-0 hero-gradient opacity-80" />
       </div>
@@ -45,14 +46,16 @@ export const ProfileSection = () => {
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start slide-up stagger-3">
               <Button
                 size="lg"
-                className="bg-white/20 text-white border border-white/30 hover:bg-white/30 backdrop-blur-sm"
+                className="bg-white/20 text-white border border-white/30 hover:bg-white/30 backdrop-blur-sm hover:scale-105 transition-all"
+                onClick={() => window.open('#', '_blank')}
               >
                 Download Resume
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-transparent text-white border-white hover:bg-white hover:text-primary"
+                className="bg-transparent text-white border-white hover:bg-white hover:text-primary hover:scale-105 transition-all"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Get In Touch
               </Button>

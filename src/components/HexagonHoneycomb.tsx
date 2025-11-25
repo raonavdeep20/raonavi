@@ -326,7 +326,7 @@ const HexagonHoneycomb: React.FC = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden bg-gradient-to-b from-background via-secondary/30 to-background">
+    <section id="tech-skills" className="py-20 relative overflow-hidden bg-gradient-to-b from-background via-secondary/30 to-background">
       <div 
         className="container mx-auto relative"
         style={{
