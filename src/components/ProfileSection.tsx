@@ -64,40 +64,48 @@ export const ProfileSection = () => {
 
           {/* Quick Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 slide-up stagger-4">
-            <div className="power-tile bg-white/10 backdrop-blur-sm border-white/20 text-white">
-              <div className="flex items-center mb-3">
-                <Calendar className="w-6 h-6 text-accent mr-3" />
-                <span className="text-sm font-medium text-white/80">Experience</span>
+            <div className="power-tile overflow-hidden">
+              <div className="power-app-header flex items-center space-x-3">
+                <Calendar className="w-5 h-5 text-primary-foreground" />
+                <span className="text-xs font-semibold">EXPERIENCE</span>
               </div>
-              <p className="text-2xl font-bold">3+ Years</p>
-              <p className="text-sm text-white/70">Software Development</p>
+              <div className="power-app-body text-center">
+                <p className="text-3xl font-bold text-primary mb-1">3+ Years</p>
+                <p className="text-sm text-muted-foreground">Software Development</p>
+              </div>
             </div>
 
-            <div className="power-tile bg-white/10 backdrop-blur-sm border-white/20 text-white">
-              <div className="flex items-center mb-3">
-                <Award className="w-6 h-6 text-accent mr-3" />
-                <span className="text-sm font-medium text-white/80">Certifications</span>
+            <div className="power-tile overflow-hidden">
+              <div className="power-app-header flex items-center space-x-3">
+                <Award className="w-5 h-5 text-primary-foreground" />
+                <span className="text-xs font-semibold">CERTIFICATIONS</span>
               </div>
-              <p className="text-2xl font-bold">Microsoft</p>
-              <p className="text-sm text-white/70">Azure Fundamentals</p>
+              <div className="power-app-body text-center">
+                <p className="text-3xl font-bold text-primary mb-1">Microsoft</p>
+                <p className="text-sm text-muted-foreground">Azure Fundamentals</p>
+              </div>
             </div>
 
-            <div className="power-tile bg-white/10 backdrop-blur-sm border-white/20 text-white">
-              <div className="flex items-center mb-3">
-                <MapPin className="w-6 h-6 text-accent mr-3" />
-                <span className="text-sm font-medium text-white/80">Location</span>
+            <div className="power-tile overflow-hidden">
+              <div className="power-app-header flex items-center space-x-3">
+                <MapPin className="w-5 h-5 text-primary-foreground" />
+                <span className="text-xs font-semibold">LOCATION</span>
               </div>
-              <p className="text-2xl font-bold">Gurugram</p>
-              <p className="text-sm text-white/70">Haryana, India</p>
+              <div className="power-app-body text-center">
+                <p className="text-3xl font-bold text-primary mb-1">Gurugram</p>
+                <p className="text-sm text-muted-foreground">Haryana, India</p>
+              </div>
             </div>
 
-            <div className="power-tile bg-white/10 backdrop-blur-sm border-white/20 text-white">
-              <div className="flex items-center mb-3">
-                <span className="text-2xl mr-3">🚀</span>
-                <span className="text-sm font-medium text-white/80">Specialization</span>
+            <div className="power-tile overflow-hidden">
+              <div className="power-app-header flex items-center space-x-3">
+                <span className="text-xl">🚀</span>
+                <span className="text-xs font-semibold">SPECIALIZATION</span>
               </div>
-              <p className="text-2xl font-bold">Power Platform</p>
-              <p className="text-sm text-white/70">Low Code Solutions</p>
+              <div className="power-app-body text-center">
+                <p className="text-3xl font-bold text-primary mb-1">Power Platform</p>
+                <p className="text-sm text-muted-foreground">Low Code Solutions</p>
+              </div>
             </div>
           </div>
         </div>
