@@ -7,7 +7,6 @@ import { CertificationsSection } from "@/components/CertificationsSection";
 import { SkillsSection } from "@/components/SkillsSection";
 import { ContactSection } from "@/components/ContactSection";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import HexagonHoneycomb from "@/components/HexagonHoneycomb";
 import PortfolioWebsite from "@/components/PortfolioWebsite";
 
 const Index = () => {
@@ -45,7 +44,6 @@ const Index = () => {
         <ProjectsSection />
         <CertificationsSection />
         <SkillsSection />
-        <HexagonHoneycomb />
         <PortfolioWebsite />
         <ContactSection />
         
