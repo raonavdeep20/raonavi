@@ -185,31 +185,34 @@ export const SkillsSection = () => {
 
           {/* Achievement Highlights */}
           <div className="mt-16">
-            <Card className="power-tile primary-gradient text-primary-foreground fade-in-up">
-              <div className="p-8 text-center">
-                <h3 className="text-2xl font-bold mb-4">Key Achievements</h3>
+            <div className="power-tile overflow-hidden fade-in-up">
+              <div className="power-app-header flex items-center justify-center space-x-3">
+                <Target className="w-6 h-6 text-primary-foreground" />
+                <span className="font-semibold text-xs">KEY ACHIEVEMENTS</span>
+              </div>
+              <div className="power-app-body">
                 <div className="grid md:grid-cols-3 gap-8">
-                  <div>
-                    <div className="text-3xl font-bold mb-2">50%</div>
-                    <p className="text-primary-foreground/80">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-primary mb-2">50%</div>
+                    <p className="text-foreground text-sm leading-relaxed">
                       Reduction in form processing time through Power Automate
                     </p>
                   </div>
-                  <div>
-                    <div className="text-3xl font-bold mb-2">95%</div>
-                    <p className="text-primary-foreground/80">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-accent mb-2">95%</div>
+                    <p className="text-foreground text-sm leading-relaxed">
                       Customer satisfaction ratio in Azure support
                     </p>
                   </div>
-                  <div>
-                    <div className="text-3xl font-bold mb-2">3+</div>
-                    <p className="text-primary-foreground/80">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-primary mb-2">3+</div>
+                    <p className="text-foreground text-sm leading-relaxed">
                       Years of enterprise software development
                     </p>
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
