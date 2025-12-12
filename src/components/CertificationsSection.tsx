@@ -11,7 +11,7 @@ const certifications = [
     issueDate: "2024",
     credentialId: "AZ-900",
     verificationUrl: "#",
-    logo: "🟦", // Microsoft Azure logo placeholder
+    logo: " ", // Microsoft Azure logo placeholder
     description: "Proven knowledge of Cloud Concepts, Azure services, Azure workloads, security and privacy in Azure, Azure pricing and support, as well as general technology concepts.",
     skills: [
       "Cloud Concepts",
