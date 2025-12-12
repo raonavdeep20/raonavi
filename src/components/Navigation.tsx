@@ -3,12 +3,12 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { id: "profile", label: "Profile", icon: "👤" },
-  { id: "experience", label: "Experience", icon: "💼" },
-  { id: "projects", label: "Projects", icon: "📂" },
-  { id: "certifications", label: "Certifications", icon: "🏆" },
-  { id: "skills", label: "Skills", icon: "📊" },
-  { id: "contact", label: "Contact", icon: "📞" },
+  { id: "profile", label: "Profile"},
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects", icon: },
+  { id: "certifications", label: "Certifications" },
+  { id: "skills", label: "Skills"},
+  { id: "contact", label: "Contact" },
 ];
 
 interface NavigationProps {
